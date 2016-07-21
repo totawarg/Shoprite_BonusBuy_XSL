@@ -49,10 +49,18 @@
 			</xsl:choose>
 		</xsl:param>
 		<!-- #########################################################REWARD TYPE ##############################################################################-->
+		
+		<xsl:variable name="countDTC">
+			<xsl:value-of select="count(RetailIncentive/Offer/Get/ProductGroup/RetailIncentiveOfferDiscountTypeCode)"/>
+		</xsl:variable>
+		<xsl:variable name="countDTCmatchingFirst">
+			<xsl:value-of select="count(RetailIncentive/Offer/Get/ProductGroup[RetailIncentiveOfferDiscountTypeCode=$discountTypeCode])"/>
+		</xsl:variable>
+				
 		<xsl:choose>
-			<!-- 				
-				<xsl:when test="not(count(RetailIncentive/Offer/Get/ProductGroup/RetailIncentiveOfferDiscountTypeCode[.=RetailIncentive/Offer/Get/ProductGroup/RetailIncentiveOfferDiscountTypeCode[1]])=count(RetailIncentive/Offer/Get/ProductGroup/RetailIncentiveOfferDiscountTypeCode))">99</xsl:when>
- -->
+			<!-- POS can only handle one RewardType, therefor all Get side Discount Type Codes should be the same. -->
+			<xsl:when test="not($countDTC = $countDTCmatchingFirst)">99</xsl:when>
+
 			<!--START  RetailIncentiveOfferDiscountTypeCode = 2-->
 			<!-- S12V4  Buy Group at  Total  Price-->
 			<!-- #rule1 -->
