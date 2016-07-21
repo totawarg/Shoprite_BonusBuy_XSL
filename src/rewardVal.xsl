@@ -54,13 +54,13 @@
 				<xsl:value-of select="$discountAmount * 100"/>
 			</xsl:when>
 			
-			
-		<!-- FREE ITEM -->
+			<!-- FREE ITEM -->
 			<xsl:when test="$rewardType=15 and  $discountPercentage = 100">
 				<xsl:value-of select="$discountPercentage div 100"/>
 			</xsl:when>
-		<!-- DISCOUNT PERCENTAGE -->
-		<!-- % OFF -->
+		
+			<!-- DISCOUNT PERCENTAGE -->
+			<!-- % OFF -->
 			<xsl:when test="($rewardType = 2 or $rewardType = 13 or $rewardType=15) and  $discountPercentage > 0">
 				<xsl:value-of select="$discountPercentage*1000"/>
 			</xsl:when>
@@ -78,7 +78,6 @@
 			<xsl:when test="$rewardType = 20">
 				<xsl:value-of select="format-number(number($GrantedQuantityLowerBoundaryDecimalValue),'0')"/>
 			</xsl:when>
-			
 			
 			<!-- TODO:  Confirm if there is a requirement for a default of 0 or empty -->
 			<xsl:otherwise>0</xsl:otherwise>
