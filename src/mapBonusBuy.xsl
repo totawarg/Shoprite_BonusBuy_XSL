@@ -8,8 +8,17 @@
 	<xsl:include href="createItemGroup.xsl"/>
 	
 	<xsl:template name="mapBonusBuy">
-		<xsl:comment>Mapping <xsl:value-of select="RetailIncentive/RetailBonusBuyID"/></xsl:comment>
-		
+		<xsl:comment>Mapping <xsl:value-of select="RetailIncentive/RetailBonusBuyID"/>
+		</xsl:comment>
+		<xsl:comment>
+			<xsl:value-of select="count(RetailIncentive/Offer/Get/ProductGroup/RetailIncentiveOfferDiscountTypeCode[.=RetailIncentive/Offer/Get/ProductGroup/RetailIncentiveOfferDiscountTypeCode[1]])"/>
+		</xsl:comment>
+		<xsl:comment>
+			<xsl:value-of select="count(RetailIncentive/Offer/Get/ProductGroup/RetailIncentiveOfferDiscountTypeCode)"/>
+		</xsl:comment>
+		<xsl:comment>
+			<xsl:value-of select="RetailIncentive/Offer/Get/ProductGroup/RetailIncentiveOfferDiscountTypeCode[1]"/>
+		</xsl:comment>
 		<xsl:variable name="rewardType">
 			<xsl:call-template name="rewardType"/>
 		</xsl:variable>
@@ -128,7 +137,6 @@
 				</xsl:variable>
 				
 				<xsl:comment>ItemGroups for next mapping step</xsl:comment>
-				
 				<!-- Buy conditions on Header level. -->
 				<xsl:if test="count(RetailIncentive/Offer/Buy/RequirementMinimumAmount) > 0 and not(RetailIncentive/Offer/Buy/RequirementMinimumAmount = 0)">
 					<!-- Inject a group with no items -->
@@ -187,6 +195,7 @@
 							</xsl:with-param>
 						</xsl:call-template>
 					</xsl:when>
+					
 					<!-- AndOrBusinessRuleExpressionTypeCode" "A"-->
 					<xsl:otherwise>
 						<xsl:for-each select="RetailIncentive/Offer/Buy/ProductGroup">

@@ -54,15 +54,20 @@
 				<xsl:value-of select="$discountAmount * 100"/>
 			</xsl:when>
 			
-			<!-- DISCOUNT PERCENTAGE -->
-			<!-- Percentage Off -->
+			
+		<!-- FREE ITEM -->
+			<xsl:when test="$rewardType=15 and  $discountPercentage = 100">
+				<xsl:value-of select="$discountPercentage div 100"/>
+			</xsl:when>
+		<!-- DISCOUNT PERCENTAGE -->
+		<!-- % OFF -->
 			<xsl:when test="($rewardType = 2 or $rewardType = 13 or $rewardType=15) and  $discountPercentage > 0">
 				<xsl:value-of select="$discountPercentage*1000"/>
 			</xsl:when>
+			
 			<xsl:when test="($rewardType=26 or $rewardType=1) and $discountAmount>0">
 				<xsl:value-of select="$discountAmount*100"/>
 			</xsl:when>
-			
 			<xsl:when test="$rewardType=26 and ($discountPercentage=100 or $priceAmount=0)">0</xsl:when>  
 			
 			<!-- PRICE AMOUNT -->
