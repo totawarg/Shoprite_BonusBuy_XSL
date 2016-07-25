@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<n0:RetailIncentiveERPStoreOfferReplicationBulkRequest_V1 xmlns:n0="http://sap.com/xi/SAPGlobal20/Global" xmlns:prx="urn:sap.com:proxy:R3D:/1SAI/TASBD72A09AF38ADD8F38E6:740">
+<n0:RetailIncentiveERPStoreOfferReplicationBulkRequest_V1 xmlns:n0="http://sap.com/xi/SAPGlobal20/Global" xmlns:prx="urn:sap.com:proxy:R3D:/1SAI/TASBD72A09AF38ADD8F38E6:740" xmlns:n1="urn:sap.shoprite.co.za:retail:pp">
   <MessageHeader>
     <ID>005056AE17701EE6939745E56107800E</ID>
     <CreationDateTime>2016-07-18T07:35:23Z</CreationDateTime>
@@ -70,7 +70,7 @@
               <InternalID>A997</InternalID>
               <StandardID>6001224255621</StandardID>
               <UnitCode>EA</UnitCode>
-              <ArticleType>ZCOU</ArticleType>
+              <n1:ArticleType>ZCOU</n1:ArticleType>
             </Product>
           </ProductGroup>
         </Get>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:n1="urn:sap.shoprite.co.za:retail:pp">
 	<xsl:template name="rewardType">
 		<!-- RetailIncentiveOfferDiscountTypeCode-->
 		<xsl:param name="discountTypeCode">
@@ -12,8 +12,8 @@
 		<!-- Article Type -->
 		<xsl:param name="articleType">
 			<xsl:choose>
-				<xsl:when test="count(RetailIncentive/Offer/Get/ProductGroup/Product[ArticleType='ZCOU']) >0">ZCOU</xsl:when>
-				<xsl:when test="count(RetailIncentive/Offer/Get/ProductGroup/Product[ArticleType='ZBON']) >0">ZBON</xsl:when>
+				<xsl:when test="count(RetailIncentive/Offer/Get/ProductGroup/Product[n1:ArticleType='ZCOU']) >0">ZCOU</xsl:when>
+				<xsl:when test="count(RetailIncentive/Offer/Get/ProductGroup/Product[n1:ArticleType='ZBON']) >0">ZBON</xsl:when>
 				<xsl:otherwise>0</xsl:otherwise>
 			</xsl:choose>
 		</xsl:param>
@@ -77,7 +77,7 @@
 			<!-- #rule3 -->
 			<xsl:when test="($discountTypeCode = 3 and $discountAmount) and $articleType='ZCOU'">26</xsl:when>
 			<!--
-			<-xsl:when test="(RetailIncentive/Offer/Get/RetailIncentiveOfferDiscountTypeCode = 3 and not(RetailIncentive/Offer/Get/DiscountAmount = 0)) and RetailIncentive/Offer/Get/ProductGroup/Product[ArticleType='ZCOU']">26</xsl:when>
+			<-xsl:when test="(RetailIncentive/Offer/Get/RetailIncentiveOfferDiscountTypeCode = 3 and not(RetailIncentive/Offer/Get/DiscountAmount = 0)) and RetailIncentive/Offer/Get/ProductGroup/Product[n1:ArticleType='ZCOU']">26</xsl:when>
 			-->
 			<!-- #rule4 -->
 			<xsl:when test="$discountTypeCode = 3">1</xsl:when>
