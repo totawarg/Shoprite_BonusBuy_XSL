@@ -2,7 +2,7 @@
 <xsl:stylesheet version="1.0" 
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:fo="http://www.w3.org/1999/XSL/Format" 
-                xmlns:java="za.co.invictus.xsl.Utils">
+                xmlns:shoprite="za.co.invictus.xsl.Utils">
 	<xsl:include href="rewardType.xsl"/>
 	<xsl:include href="rewardVal.xsl"/>
 	<xsl:include href="createItemGroup.xsl"/>
@@ -119,7 +119,7 @@
 					<xsl:variable name="buyProducts" select="RetailIncentive/Offer/Buy/ProductGroup/Product/StandardID"/>
 					<xsl:variable name="getProducts" select="RetailIncentive/Offer/Get/ProductGroup/Product/StandardID"/>
 					
-					<xsl:value-of select="string(java:compareQueues($buyProducts, $getProducts))"/>
+					<xsl:value-of select="string(shoprite:compareQueues($buyProducts, $getProducts))"/>
 					
 				</xsl:variable>
 				

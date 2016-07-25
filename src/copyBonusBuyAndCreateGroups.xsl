@@ -9,7 +9,7 @@
 				<xsl:element name="Date">
 					<xsl:value-of select="../HeaderRecord/Date"/>
 				</xsl:element>
-				<xsl:element name="Store">
+				<xsl:element name="Site">
 					<xsl:value-of select="StoreInternalID"/>
 				</xsl:element>
 			</xsl:element>
