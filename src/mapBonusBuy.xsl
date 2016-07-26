@@ -32,12 +32,18 @@
 				</xsl:element>
 			</xsl:for-each>
 			<xsl:element name="HeaderRecord">
+			    <xsl:element name="MessageID">
+			    	<xsl:value-of select="MessageHeader/ID"/>
+			    </xsl:element> 
 				<xsl:element name="Description">
 					<xsl:value-of select="RetailIncentive/Offer/Description/Description"/>
 				</xsl:element>
 				<xsl:element name="Date">
 					<!--Source Creation Date YYYY-MM-DDTHH:MM:SSZ" -->
 					<xsl:value-of select="substring(MessageHeader/CreationDateTime,0,11)"/>
+				</xsl:element>
+				<xsl:element name="FileDateTime">
+					<xsl:value-of select="shoprite:convertUTCtoSouthAfricaTimezone(MessageHeader/CreationDateTime)"/>
 				</xsl:element>
 			</xsl:element>
 			<!-- TODO:  limit to 9 chars - What is going to be the SAP Number Range?  Can we do a substring()/right()? -->

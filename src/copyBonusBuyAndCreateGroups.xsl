@@ -3,6 +3,10 @@
 	<xsl:template name="copyBonusBuyAndCreateGroups">
 		<xsl:element name="Promotion">
 			<xsl:element name="HeaderRecord">
+					
+				<xsl:element name="MessageID">
+					<xsl:value-of select="../HeaderRecord/MessageID"/>
+				</xsl:element>	
 				<xsl:element name="Decription">
 					<xsl:value-of select="../HeaderRecord/Description"/>
 				</xsl:element>
@@ -12,6 +16,10 @@
 				<xsl:element name="Site">
 					<xsl:value-of select="StoreInternalID"/>
 				</xsl:element>
+				<xsl:element name="FileDateTime">
+				<xsl:value-of select="../HeaderRecord/FileDateTime"/>
+				</xsl:element>
+				
 			</xsl:element>
 			<xsl:copy-of select="../PromotionNo"/>
 			<xsl:copy-of select="../Promotiontype"/>
