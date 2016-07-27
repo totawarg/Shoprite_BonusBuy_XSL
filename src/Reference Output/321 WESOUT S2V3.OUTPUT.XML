@@ -1,1 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?><ArrayOfPromotion_withStores><!--Mapping 100000000321--><!--0--><!--0--><!----><Promotion><!--Carry stores for splitting later...--><ReceivingStore><StoreInternalID>189</StoreInternalID></ReceivingStore><HeaderRecord><Description>For every "X" amount spent get "Y" amount off entire basket</Description><Date>2016-07-08</Date></HeaderRecord><PromotionNo>100000000321</PromotionNo><!--Defaulted to 3--><Promotiontype>3</Promotiontype><RewardType>1</RewardType><StartDate>2016-12-11</StartDate><EndDate>2016-12-10</EndDate><Description>For every "X" amount spent get "Y" amount off entire basket</Description><Rewardval>1000</Rewardval><!--Defaulted to 1--><ApportAlg>1</ApportAlg><LowHighReward/><DelayedPromotion/><MessageTypeId>0</MessageTypeId><TemplateId>0</TemplateId><MemberCardReq>0</MemberCardReq><LimitQuantity>0</LimitQuantity><Items><!--ItemGroups for next mapping step--><ItemGroup><GroupType>5</GroupType><GroupQuantity>15000</GroupQuantity><ApplyReward>0</ApplyReward></ItemGroup></Items></Promotion></ArrayOfPromotion_withStores>
+<?xml version="1.0" encoding="UTF-8"?>
+<ArrayOfPromotion_withStores>
+	<Promotion>
+		<ReceivingStore>
+			<StoreInternalID>189</StoreInternalID>
+		</ReceivingStore>
+		<HeaderRecord>
+			<MessageID>005056AE17701EE6919BD8038E639B91</MessageID>
+			<Description>For every "X" amount spent get "Y" amount off entire basket</Description>
+			<Date>2016-07-08</Date>
+			<FileDateTime>20160708093657</FileDateTime>
+		</HeaderRecord>
+		<PromotionNo>100000000321</PromotionNo>
+		<Promotiontype>3</Promotiontype>
+		<RewardType>1</RewardType>
+		<StartDate>2016-12-11</StartDate>
+		<EndDate>2016-12-10</EndDate>
+		<Description>For every "X" amount spent get "Y" amount off entire basket</Description>
+		<Rewardval>1000</Rewardval>
+		<ApportAlg>1</ApportAlg>
+		<LowHighReward/>
+		<DelayedPromotion/>
+		<MessageTypeId>0</MessageTypeId>
+		<TemplateId>0</TemplateId>
+		<MemberCardReq>0</MemberCardReq>
+		<LimitQuantity>0</LimitQuantity>
+		<Items>
+			<ItemGroup>
+				<GroupType>5</GroupType>
+				<GroupQuantity>15000</GroupQuantity>
+				<ApplyReward>0</ApplyReward>
+			</ItemGroup>
+		</Items>
+	</Promotion>
+</ArrayOfPromotion_withStores>

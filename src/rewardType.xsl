@@ -12,11 +12,12 @@
 		<!-- Article Type -->
 		<xsl:param name="articleType">
 			<xsl:choose>
-				<xsl:when test="count(RetailIncentive/Offer/Get/ProductGroup/Product[n1:ArticleType='ZCOU']) >0">ZCOU</xsl:when>
-				<xsl:when test="count(RetailIncentive/Offer/Get/ProductGroup/Product[n1:ArticleType='ZBON']) >0">ZBON</xsl:when>
+				<xsl:when test="count(RetailIncentive/Offer/Get/ProductGroup/Product[*[local-name() = 'ArticleType']='ZCOU'])>0">ZCOU</xsl:when>
+				<xsl:when test="count(RetailIncentive/Offer/Get/ProductGroup/Product[*[local-name() = 'ArticleType']='ZBON'])>0>0">ZBON</xsl:when>
 				<xsl:otherwise>0</xsl:otherwise>
 			</xsl:choose>
 		</xsl:param>
+		
 		<!-- DISCOUNT % -->
 		<xsl:param name="discountPercentage">
 			<xsl:choose>

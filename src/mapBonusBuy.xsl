@@ -2,14 +2,16 @@
 <xsl:stylesheet version="1.0" 
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:fo="http://www.w3.org/1999/XSL/Format" 
-                xmlns:shoprite="za.co.invictus.xsl.Utils">
+                xmlns:shoprite="za.co.invictus.xsl.Utils" xmlns:n1="urn:sap.shoprite.co.za:retail:pp" >
 	<xsl:include href="rewardType.xsl"/>
 	<xsl:include href="rewardVal.xsl"/>
 	<xsl:include href="createItemGroup.xsl"/>
 	
 	<xsl:template name="mapBonusBuy">
 		<xsl:comment>Mapping <xsl:value-of select="RetailIncentive/RetailBonusBuyID"/>
+		
 		</xsl:comment>
+		
 		<xsl:comment>
 			<xsl:value-of select="count(RetailIncentive/Offer/Get/ProductGroup/RetailIncentiveOfferDiscountTypeCode[.=RetailIncentive/Offer/Get/ProductGroup/RetailIncentiveOfferDiscountTypeCode[1]])"/>
 		</xsl:comment>
@@ -21,6 +23,13 @@
 		</xsl:comment>
 		<xsl:variable name="rewardType">
 			<xsl:call-template name="rewardType"/>
+		</xsl:variable>
+		<xsl:variable name="checkArticleType">
+			<xsl:choose>
+				<xsl:when test="count(RetailIncentive/Offer/Get/ProductGroup/Product[*[local-name() = 'ArticleType']='ZBON'])>0">ZBON</xsl:when>
+				<xsl:when test="count(RetailIncentive/Offer/Get/ProductGroup/Product[*[local-name() = 'ArticleType']='ZCOU'])>0">ZCOU</xsl:when>
+				<xsl:otherwise>OTHERARTICLETYPES</xsl:otherwise>
+			</xsl:choose>
 		</xsl:variable>
 		<xsl:element name="Promotion">
 			<xsl:comment>Carry stores for splitting later...</xsl:comment>
@@ -39,9 +48,10 @@
 					<xsl:value-of select="RetailIncentive/Offer/Description/Description"/>
 				</xsl:element>
 				<xsl:element name="Date">
-					<!--Source Creation Date YYYY-MM-DDTHH:MM:SSZ" -->
-					<xsl:value-of select="substring(MessageHeader/CreationDateTime,0,11)"/>
+					<!--Source Creation Date yyyy-MM-ddTHH:MM:ssZ" to yyyy-MM-dd-->
+					<xsl:value-of select="shoprite:convertUTCtoSouthAfricaTimezone2(MessageHeader/CreationDateTime)"/>
 				</xsl:element>
+				<!--Source Creation Date yyyy-MM-ddThh:mm:ssZ" to yyyyMMddHHmmss-->
 				<xsl:element name="FileDateTime">
 					<xsl:value-of select="shoprite:convertUTCtoSouthAfricaTimezone(MessageHeader/CreationDateTime)"/>
 				</xsl:element>
@@ -159,7 +169,7 @@
 				</xsl:if>
 				<xsl:choose>
 					<!-- For Free Item only, if Buy and Get contains same items then merge the groups. -->
-					<xsl:when test="$rewardType = 15 and $buyAndGetMatches">
+					<xsl:when test="$rewardType = 15 and string($buyAndGetMatches) = 'true'">
 						<xsl:comment>Suppress Buy:  Free Item and Buy &amp; Get Matches</xsl:comment>
 					
 					</xsl:when>
@@ -194,7 +204,7 @@
 								<xsl:value-of select="$groupType"/>
 							</xsl:with-param>
 							<xsl:with-param name="groupQuantity">
-								<xsl:value-of select="$groupQuantity"/>
+								<xsl:value-of select="format-number($groupQuantity,0)"/>
 							</xsl:with-param>
 							<xsl:with-param name="applyReward">
 								<xsl:value-of select="$applyReward"/>
@@ -240,7 +250,7 @@
 									<xsl:value-of select="$groupType"/>
 								</xsl:with-param>
 								<xsl:with-param name="groupQuantity">
-									<xsl:value-of select="$groupQuantity"/>
+									<xsl:value-of select="format-number($groupQuantity,0)"/>
 								</xsl:with-param>
 								<xsl:with-param name="applyReward">
 									<xsl:value-of select="$applyReward"/>
@@ -255,6 +265,10 @@
 					<xsl:when test="$rewardType=26">
 						<xsl:comment>RewardType 26 - do not map any Get groups.</xsl:comment>
 					</xsl:when>
+					<xsl:when test="$checkArticleType='ZBON' or $checkArticleType='ZCOU'">
+					<xsl:comment>RewardType 15 - do not map any Get groups for article type ZBON and ZCOU</xsl:comment>
+					</xsl:when>
+					
 					<xsl:otherwise>
 						<xsl:choose>
 						     <!-- AndOrBusinessRuleExpressionTypeCode" "O"-->
@@ -281,8 +295,11 @@
 								</xsl:variable>
 								<xsl:variable name="groupQuantity">
 									<xsl:choose>
+									
 										<!-- Quantities must be the same!  Trap here if PI to check. -->
+										
 										<xsl:when test="not(GrantedQuantityLowerBoundaryDecimalValue = 0)">1</xsl:when>
+										
 										<xsl:otherwise>0</xsl:otherwise>
 									</xsl:choose>
 								</xsl:variable>
@@ -294,7 +311,7 @@
 										<xsl:value-of select="$groupType"/>
 									</xsl:with-param>
 									<xsl:with-param name="groupQuantity">
-										<xsl:value-of select="$groupQuantity"/>
+										<xsl:value-of select="format-number($groupQuantity,0)"/>
 									</xsl:with-param>
 									<xsl:with-param name="applyReward">
 										<xsl:value-of select="$applyReward"/>
@@ -303,6 +320,7 @@
 							</xsl:when>
 							<!-- AndOrBusinessRuleExpressionTypeCode" "A"-->
 							<xsl:otherwise>
+							    
 								<xsl:for-each select="RetailIncentive/Offer/Get/ProductGroup">
 									<xsl:variable name="group">
 										<xsl:value-of select="position()"/>
@@ -316,19 +334,23 @@
 											<xsl:when test="number(../DiscountAmount) > 0">0</xsl:when>
 											<xsl:when test="number(DiscountPercent) > 0">1</xsl:when>
 											<!-- Andy to confirm if Discount Percent at Get level applies to Basket or Groups -->
-											<xsl:when test="number(../DiscountPercent) > 0">0</xsl:when>
+											<xsl:when test="number(../DiscountPercent) > 0">1</xsl:when>
 											<xsl:when test="not(GrantedQuantityLowerBoundaryDecimalValue = 0)">1</xsl:when>
 											<xsl:otherwise>0</xsl:otherwise>
 										</xsl:choose>
 									</xsl:variable>
 									<xsl:variable name="groupType">
 										<xsl:choose>
+							
 											<xsl:when test="not(GrantedQuantityLowerBoundaryDecimalValue = 0)">1</xsl:when>
 											<xsl:otherwise>0</xsl:otherwise>
 										</xsl:choose>
 									</xsl:variable>
 									<xsl:variable name="groupQuantity">
 										<xsl:choose>
+										<xsl:when test="$rewardType = 15 and string($buyAndGetMatches) = 'true'">
+										<xsl:value-of select="number(../../Buy/ProductGroup/RequirementQuantityDecimalValue) + number(GrantedQuantityLowerBoundaryDecimalValue)"/>
+									</xsl:when>
 											<xsl:when test="not(GrantedQuantityLowerBoundaryDecimalValue = 0)">
 												<xsl:value-of select="GrantedQuantityLowerBoundaryDecimalValue"/>
 											</xsl:when>
@@ -345,7 +367,7 @@
 											<xsl:value-of select="$groupType"/>
 										</xsl:with-param>
 										<xsl:with-param name="groupQuantity">
-											<xsl:value-of select="$groupQuantity"/>
+											<xsl:value-of select="format-number($groupQuantity,0)"/>
 										</xsl:with-param>
 										<xsl:with-param name="applyReward">
 											<xsl:value-of select="$applyReward"/>

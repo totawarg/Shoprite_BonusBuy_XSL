@@ -42,11 +42,43 @@
 			</xsl:choose>
 			
 		</xsl:param>
-		
+		<!-- Check All Reward Values are Same -->
+		<!--  Needs confirmation on this rule Not yet applied -->
+		<xsl:param name="checkRewardValuesAllSameForAllPG">
+		<xsl:choose>
+			<xsl:when test="count(RetailIncentive/Offer/Get/ProductGroup)>0">
+			<xsl:choose>
+				<xsl:when test="number(RetailIncentive/Offer/Get/ProductGroup/DiscountAmount)>0">
+					<xsl:choose>
+						<xsl:when test="count(RetailIncentive/Offer/Get/ProductGroup[DiscountAmount=$discountAmount])=count(RetailIncentive/Offer/Get/ProductGroup/DiscountAmount)"><xsl:value-of select="'true'"/> 
+						</xsl:when>
+						<xsl:otherwise><xsl:value-of select="'false'"/> </xsl:otherwise>
+					</xsl:choose>
+				</xsl:when>
+				<xsl:when test="number(RetailIncentive/Offer/Get/ProductGroup/DiscountPercent)>0">
+					<xsl:choose>
+						<xsl:when test="count(RetailIncentive/Offer/Get/ProductGroup[DiscountPercent=$discountPercentage])=count(RetailIncentive/Offer/Get/ProductGroup/DiscountPercent)"><xsl:value-of select="'true'"/> 
+						</xsl:when>
+						<xsl:otherwise><xsl:value-of select="'false'"/> </xsl:otherwise>
+					</xsl:choose>
+				</xsl:when>
+				<xsl:when test="number(RetailIncentive/Offer/Get/ProductGroup/PriceAmount)>0">
+					<xsl:choose>
+						<xsl:when test="count(RetailIncentive/Offer/Get/ProductGroup[PriceAmount=$priceAmount])=count(RetailIncentive/Offer/Get/ProductGroup/PriceAmount)"><xsl:value-of select="'true'"/> 
+						</xsl:when>
+						<xsl:otherwise><xsl:value-of select="'false'"/> </xsl:otherwise>
+					</xsl:choose>
+				</xsl:when>
+				<xsl:otherwise><xsl:value-of select="'false'"/></xsl:otherwise>
+			</xsl:choose>
+			</xsl:when>
+			<xsl:otherwise><xsl:value-of select="'true'"/></xsl:otherwise>
+		</xsl:choose>
+		</xsl:param>
+
 		<!-- GrantedQuantityLowerBoundaryDecimalValue -->
 		<xsl:variable name="GrantedQuantityLowerBoundaryDecimalValue" select="RetailIncentive/Offer/Get/ProductGroup/GrantedQuantityLowerBoundaryDecimalValue"/>
-		
-		<xsl:choose>
+				<xsl:choose>
 			<!-- DISCOUNT AMOUNT -->	
 			<!-- Cash Off - Check Get then Get/ProductGroup. -->
 			

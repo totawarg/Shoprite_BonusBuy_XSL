@@ -1,1 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?><ArrayOfPromotion_withStores><!--Mapping 100000000328--><!--0--><!--0--><!----><Promotion><!--Carry stores for splitting later...--><ReceivingStore><StoreInternalID>189</StoreInternalID></ReceivingStore><HeaderRecord><Description>Buy 2 of same articls at Specific Price</Description><Date>2016-07-14</Date></HeaderRecord><PromotionNo>100000000328</PromotionNo><!--Defaulted to 3--><Promotiontype>3</Promotiontype><RewardType>8</RewardType><StartDate>2016-12-23</StartDate><EndDate>2016-12-24</EndDate><Description>Buy 2 of same articls at Specific Price</Description><Rewardval>17999</Rewardval><!--Defaulted to 1--><ApportAlg>1</ApportAlg><LowHighReward/><DelayedPromotion/><MessageTypeId>0</MessageTypeId><TemplateId>0</TemplateId><MemberCardReq>0</MemberCardReq><LimitQuantity>0</LimitQuantity><Items><!--ItemGroups for next mapping step--><ItemGroup><GroupType>1</GroupType><GroupQuantity>2.0</GroupQuantity><ApplyReward>1</ApplyReward><Item><Barcode>6001452140003</Barcode><GroupLink>GET1</GroupLink></Item></ItemGroup></Items></Promotion></ArrayOfPromotion_withStores>
+<?xml version="1.0" encoding="UTF-8"?>
+<ArrayOfPromotion_withStores>
+	<Promotion>
+		<ReceivingStore>
+			<StoreInternalID>189</StoreInternalID>
+		</ReceivingStore>
+		<HeaderRecord>
+			<MessageID>005056AE17701ED692B6A7FD60E48116</MessageID>
+			<Description>Buy 2 of same articls at Specific Price</Description>
+			<Date>2016-07-14</Date>
+			<FileDateTime>20160714132230</FileDateTime>
+		</HeaderRecord>
+		<PromotionNo>100000000328</PromotionNo>
+		<Promotiontype>3</Promotiontype>
+		<RewardType>8</RewardType>
+		<StartDate>2016-12-23</StartDate>
+		<EndDate>2016-12-24</EndDate>
+		<Description>Buy 2 of same articls at Specific Price</Description>
+		<Rewardval>17999</Rewardval>
+		<ApportAlg>1</ApportAlg>
+		<LowHighReward/>
+		<DelayedPromotion/>
+		<MessageTypeId>0</MessageTypeId>
+		<TemplateId>0</TemplateId>
+		<MemberCardReq>0</MemberCardReq>
+		<LimitQuantity>0</LimitQuantity>
+		<Items>
+			<ItemGroup>
+				<GroupType>1</GroupType>
+				<GroupQuantity>2</GroupQuantity>
+				<ApplyReward>1</ApplyReward>
+				<Item>
+					<Barcode>6001452140003</Barcode>
+					<GroupLink>GET1</GroupLink>
+				</Item>
+			</ItemGroup>
+		</Items>
+	</Promotion>
+</ArrayOfPromotion_withStores>

@@ -1,1 +1,64 @@
-<?xml version="1.0" encoding="UTF-8"?><ArrayOfPromotion_withStores><!--Mapping 100000000377--><!--0--><!--1--><!--3--><Promotion><!--Carry stores for splitting later...--><ReceivingStore><StoreInternalID>189</StoreInternalID></ReceivingStore><HeaderRecord><Description>Target Message Airtime</Description><Date>2016-07-18</Date></HeaderRecord><PromotionNo>100000000377</PromotionNo><!--Defaulted to 3--><Promotiontype>3</Promotiontype><RewardType>26</RewardType><StartDate>2016-08-01</StartDate><EndDate>2016-08-0</EndDate><Description>Target Message Airtime</Description><Rewardval>500</Rewardval><!--Defaulted to 1--><ApportAlg>1</ApportAlg><LowHighReward/><DelayedPromotion/><MessageTypeId>A03</MessageTypeId><TemplateId>0</TemplateId><MemberCardReq>0</MemberCardReq><LimitQuantity>0</LimitQuantity><Items><!--ItemGroups for next mapping step--><ItemGroup><GroupType>1</GroupType><GroupQuantity>2.0</GroupQuantity><ApplyReward>0</ApplyReward><Item><Barcode>8712000030605</Barcode><GroupLink>BUY1</GroupLink></Item><Item><Barcode>6009801472041</Barcode><GroupLink>BUY1</GroupLink></Item><Item><Barcode>6001760005506</Barcode><GroupLink>BUY1</GroupLink></Item><Item><Barcode>6001760005568</Barcode><GroupLink>BUY1</GroupLink></Item><Item><Barcode>6009801472706</Barcode><GroupLink>BUY1</GroupLink></Item></ItemGroup><!--RewardType 26 - do not map any Get groups.--></Items></Promotion></ArrayOfPromotion_withStores>
+<?xml version="1.0" encoding="UTF-8"?>
+<ArrayOfPromotion_withStores>
+	<!--Mapping 100000000377-->
+	<!--0-->
+	<!--1-->
+	<!--3-->
+	<Promotion>
+		<!--Carry stores for splitting later...-->
+		<ReceivingStore>
+			<StoreInternalID>189</StoreInternalID>
+		</ReceivingStore>
+		<HeaderRecord>
+			<MessageID>005056AE17701ED69396B797E6E13F1B</MessageID>
+			<Description>Target Message Airtime</Description>
+			<Date>2016-07-18</Date>
+			<FileDateTime>20160718090332</FileDateTime>
+		</HeaderRecord>
+		<PromotionNo>100000000377</PromotionNo>
+		<!--Defaulted to 3-->
+		<Promotiontype>3</Promotiontype>
+		<RewardType>26</RewardType>
+		<StartDate>2016-08-01</StartDate>
+		<EndDate>2016-08-0</EndDate>
+		<Description>Target Message Airtime</Description>
+		<Rewardval>500</Rewardval>
+		<!--Defaulted to 1-->
+		<ApportAlg>1</ApportAlg>
+		<LowHighReward/>
+		<DelayedPromotion/>
+		<MessageTypeId>A03</MessageTypeId>
+		<TemplateId>0</TemplateId>
+		<MemberCardReq>0</MemberCardReq>
+		<LimitQuantity>0</LimitQuantity>
+		<Items>
+			<!--ItemGroups for next mapping step-->
+			<ItemGroup>
+				<GroupType>1</GroupType>
+				<GroupQuantity>2</GroupQuantity>
+				<ApplyReward>0</ApplyReward>
+				<Item>
+					<Barcode>8712000030605</Barcode>
+					<GroupLink>BUY1</GroupLink>
+				</Item>
+				<Item>
+					<Barcode>6009801472041</Barcode>
+					<GroupLink>BUY1</GroupLink>
+				</Item>
+				<Item>
+					<Barcode>6001760005506</Barcode>
+					<GroupLink>BUY1</GroupLink>
+				</Item>
+				<Item>
+					<Barcode>6001760005568</Barcode>
+					<GroupLink>BUY1</GroupLink>
+				</Item>
+				<Item>
+					<Barcode>6009801472706</Barcode>
+					<GroupLink>BUY1</GroupLink>
+				</Item>
+			</ItemGroup>
+			<!--RewardType 26 - do not map any Get groups.-->
+		</Items>
+	</Promotion>
+</ArrayOfPromotion_withStores>

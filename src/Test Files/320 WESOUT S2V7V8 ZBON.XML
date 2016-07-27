@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<n0:RetailIncentiveERPStoreOfferReplicationBulkRequest_V1 xmlns:n0="http://sap.com/xi/SAPGlobal20/Global" xmlns:prx="urn:sap.com:proxy:R3D:/1SAI/TASBD72A09AF38ADD8F38E6:740">
+<n0:RetailIncentiveERPStoreOfferReplicationBulkRequest_V1 xmlns:n0="http://sap.com/xi/SAPGlobal20/Global" xmlns:n1="urn:sap.shoprite.co.za:retail:pp" xmlns:prx="urn:sap.com:proxy:R3D:/1SAI/TASBD72A09AF38ADD8F38E6:740">
   <MessageHeader>
-    <ID>005056AE17701EE6939745E56107800E</ID>
-    <CreationDateTime>2016-07-18T07:35:23Z</CreationDateTime>
+    <ID>005056AE17701EE6919B5D9E0734BADD</ID>
+    <CreationDateTime>2016-07-08T07:09:35Z</CreationDateTime>
     <SenderBusinessSystemID>R3DCLNT001</SenderBusinessSystemID>
     <RecipientBusinessSystemID>PIDCLNT001</RecipientBusinessSystemID>
   </MessageHeader>
   <RetailIncentiveERPStoreOfferReplicationRequestMessage_V1>
     <MessageHeader>
-      <ID>005056AE17701EE6939745E56107600E</ID>
-      <CreationDateTime>2016-07-18T07:35:23Z</CreationDateTime>
+      <ID>005056AE17701EE6919B5D9E07349ADD</ID>
+      <CreationDateTime>2016-07-08T07:09:35Z</CreationDateTime>
       <SenderBusinessSystemID>R3DCLNT001</SenderBusinessSystemID>
       <RecipientBusinessSystemID>PIDCLNT001</RecipientBusinessSystemID>
     </MessageHeader>
     <RetailIncentive>
-      <RetailBonusBuyID>100000000371</RetailBonusBuyID>
+      <RetailBonusBuyID>100000000320</RetailBonusBuyID>
       <TypeCode>2</TypeCode>
       <SalesPeriod>
-        <StartDate>2016-08-15</StartDate>
-        <EndDate>2016-08-16</EndDate>
+        <StartDate>2016-12-09</StartDate>
+        <EndDate>2016-12-10</EndDate>
       </SalesPeriod>
       <DataOriginTypeCode>1</DataOriginTypeCode>
       <ReceivingStore>
@@ -28,8 +28,8 @@
         <StoreGroup>
           <ID>MV1000</ID>
           <SalesPeriod>
-            <StartDate>2016-08-15</StartDate>
-            <EndDate>2016-08-16</EndDate>
+            <StartDate>2016-12-09</StartDate>
+            <EndDate>2016-12-10</EndDate>
           </SalesPeriod>
           <Store>
             <InternalID>189</InternalID>
@@ -37,26 +37,17 @@
         </StoreGroup>
       </SalesArea>
       <Offer>
-        <ID>~B00100000000371</ID>
-        <AlternativeRetailIncentiveOfferID>100000000371</AlternativeRetailIncentiveOfferID>
+        <ID>~B00100000000320</ID>
+        <AlternativeRetailIncentiveOfferID>100000000320</AlternativeRetailIncentiveOfferID>
         <CategoryCode>2</CategoryCode>
         <TargetTypeCode>1</TargetTypeCode>
         <ActivationStatusCode>2</ActivationStatusCode>
-        <GrantingMaximumNumberValue>1</GrantingMaximumNumberValue>
         <Description>
-          <Description languageCode="en">TM 10% Discount for future purchase of article</Description>
+          <Description languageCode="en">For every "X" amount spent get a Free Article "Y"</Description>
         </Description>
         <Buy>
           <AndOrBusinessRuleExpressionTypeCode>A</AndOrBusinessRuleExpressionTypeCode>
-          <ProductGroup>
-            <RequirementQuantityDecimalValue>1.0</RequirementQuantityDecimalValue>
-            <RetailBonusBuyProductSelectionConditionCode>2</RetailBonusBuyProductSelectionConditionCode>
-            <Product>
-              <InternalID>10408957</InternalID>
-              <StandardID>6001108050458</StandardID>
-              <UnitCode>EA</UnitCode>
-            </Product>
-          </ProductGroup>
+          <RequirementMinimumAmount currencyCode="ZAR">150.0</RequirementMinimumAmount>
         </Buy>
         <Get>
           <AndOrBusinessRuleExpressionTypeCode>A</AndOrBusinessRuleExpressionTypeCode>
@@ -67,10 +58,10 @@
             <RetailIncentiveOfferDiscountTypeCode>4</RetailIncentiveOfferDiscountTypeCode>
             <DiscountPercent>100.0</DiscountPercent>
             <Product>
-              <InternalID>A997</InternalID>
-              <StandardID>6001224255621</StandardID>
+              <InternalID>10260940</InternalID>
+              <StandardID>0018859900006</StandardID>
               <UnitCode>EA</UnitCode>
-              <ArticleType>ZCOU</ArticleType>
+              <n1:ArticleType>ZBON</n1:ArticleType>
             </Product>
           </ProductGroup>
         </Get>

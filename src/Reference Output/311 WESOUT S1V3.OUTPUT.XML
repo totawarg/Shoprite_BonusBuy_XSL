@@ -1,1 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?><ArrayOfPromotion_withStores><!--Mapping 100000000311--><!--0--><!--0--><!----><Promotion><!--Carry stores for splitting later...--><ReceivingStore><StoreInternalID>189</StoreInternalID></ReceivingStore><HeaderRecord><Description>Spend "X" or more and get "Y" Rand off</Description><Date>2016-07-08</Date></HeaderRecord><PromotionNo>100000000311</PromotionNo><!--Defaulted to 3--><Promotiontype>3</Promotiontype><RewardType>1</RewardType><StartDate>2016-06-11</StartDate><EndDate>2016-06-10</EndDate><Description>Spend "X" or more and get "Y" Rand off</Description><Rewardval>5000</Rewardval><!--Defaulted to 1--><ApportAlg>1</ApportAlg><LowHighReward/><DelayedPromotion/><MessageTypeId>0</MessageTypeId><TemplateId>0</TemplateId><MemberCardReq>0</MemberCardReq><LimitQuantity>1</LimitQuantity><Items><!--ItemGroups for next mapping step--><ItemGroup><GroupType>5</GroupType><GroupQuantity>80000</GroupQuantity><ApplyReward>0</ApplyReward></ItemGroup></Items></Promotion></ArrayOfPromotion_withStores>
+<?xml version="1.0" encoding="UTF-8"?>
+<ArrayOfPromotion_withStores>
+	<Promotion>
+		<ReceivingStore>
+			<StoreInternalID>189</StoreInternalID>
+		</ReceivingStore>
+		<HeaderRecord>
+			<MessageID>005056AE17701EE6919BD7AE17407B91</MessageID>
+			<Description>Spend "X" or more and get "Y" Rand off</Description>
+			<Date>2016-07-08</Date>
+			<FileDateTime>20160708093653</FileDateTime>
+		</HeaderRecord>
+		<PromotionNo>100000000311</PromotionNo>
+		<Promotiontype>3</Promotiontype>
+		<RewardType>1</RewardType>
+		<StartDate>2016-06-11</StartDate>
+		<EndDate>2016-06-10</EndDate>
+		<Description>Spend "X" or more and get "Y" Rand off</Description>
+		<Rewardval>5000</Rewardval>
+		<ApportAlg>1</ApportAlg>
+		<LowHighReward/>
+		<DelayedPromotion/>
+		<MessageTypeId>0</MessageTypeId>
+		<TemplateId>0</TemplateId>
+		<MemberCardReq>0</MemberCardReq>
+		<LimitQuantity>1</LimitQuantity>
+		<Items>
+			<ItemGroup>
+				<GroupType>5</GroupType>
+				<GroupQuantity>80000</GroupQuantity>
+				<ApplyReward>0</ApplyReward>
+			</ItemGroup>
+		</Items>
+	</Promotion>
+</ArrayOfPromotion_withStores>

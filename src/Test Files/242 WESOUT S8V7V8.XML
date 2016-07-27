@@ -55,11 +55,6 @@
 							<StandardID>6009801472041</StandardID>
 							<UnitCode>PK1</UnitCode>
 						</Product>
-						<Product>
-							<InternalID>10249618</InternalID>
-							<StandardID>6009801472042</StandardID>
-							<UnitCode>PK1</UnitCode>
-						</Product>
 					</ProductGroup>
 				</Buy>
 				<Get>
@@ -73,10 +68,6 @@
 						<Product>
 							<InternalID>10249618</InternalID>
 							<StandardID>6009801472041</StandardID>
-							<UnitCode>PK1</UnitCode>
-						</Product><Product>
-							<InternalID>10249618</InternalID>
-							<StandardID>6009801472042</StandardID>
 							<UnitCode>PK1</UnitCode>
 						</Product>
 					</ProductGroup>
