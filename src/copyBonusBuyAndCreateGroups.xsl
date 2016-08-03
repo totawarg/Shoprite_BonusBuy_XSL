@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format">
-	<xsl:template name="copyBonusBuyAndCreateGroups">
+	<xsl:template name="copyBonusBuyAndCreateGroups" >
 		<xsl:element name="Promotion">
 			<xsl:element name="HeaderRecord">
 					
@@ -68,6 +68,10 @@
 					<xsl:value-of select="position()"/>
 					<xsl:text disable-output-escaping="yes">&gt;</xsl:text>
 				</xsl:for-each>
+				<xsl:call-template name="loop">
+					<xsl:with-param name="var">10</xsl:with-param>
+					<xsl:with-param name="index"><xsl:value-of select="count(../Items/ItemGroup)+1"/></xsl:with-param>
+				</xsl:call-template>
 			</xsl:element>
 			<xsl:element name="GroupQuantities">
 				<xsl:for-each select="../Items/ItemGroup">
@@ -95,30 +99,30 @@
 			</xsl:element>
 			<xsl:comment>Defaulted to 1</xsl:comment>
 			<xsl:element name="ActivationDays">
-				<Monday>1</Monday>
-				<Tuesday>1</Tuesday>
-				<Wednesday>1</Wednesday>
-				<Thursday>1</Thursday>
-				<Friday>1</Friday>
-				<Saturday>1</Saturday>
-				<Sunday>1</Sunday>
+				<xsl:element name="Monday">1</xsl:element>
+				<xsl:element name="Tuesday">1</xsl:element>
+				<xsl:element name="Wednesday">1</xsl:element>
+				<xsl:element name="Thursday">1</xsl:element>
+				<xsl:element name="Friday">1</xsl:element>
+				<xsl:element name="Saturday">1</xsl:element>
+				<xsl:element name="Sunday">1</xsl:element>
 			</xsl:element>
 			<xsl:comment>Defaulted times</xsl:comment>
 			<xsl:element name="ActivationTimes">
-				<MondayStart>00:00:00</MondayStart>
-				<MondayEnd>23:59:00</MondayEnd>
-				<TuesdayStart>00:00:00</TuesdayStart>
-				<TuesdayEnd>23:59:00</TuesdayEnd>
-				<WednesdayStart>00:00:00</WednesdayStart>
-				<WednesdayEnd>23:59:00</WednesdayEnd>
-				<ThursdayStart>00:00:00</ThursdayStart>
-				<ThursdayEnd>23:59:00</ThursdayEnd>
-				<FridayStart>00:00:00</FridayStart>
-				<FridayEnd>23:59:00</FridayEnd>
-				<SaturdayStart>00:00:00</SaturdayStart>
-				<SaturdayEnd>23:59:00</SaturdayEnd>
-				<SundayStart>00:00:00</SundayStart>
-				<SundayEnd>23:59:00</SundayEnd>
+				<xsl:element name="MondayStart">00:00:00</xsl:element>
+				<xsl:element name="MondayEnd">23:59:00</xsl:element>
+				<xsl:element name="TuesdayStart">00:00:00</xsl:element>
+				<xsl:element name="TuesdayEnd">23:59:00</xsl:element>
+				<xsl:element name="WednesdayStart">00:00:00</xsl:element>
+				<xsl:element name="WednesdayEnd">23:59:00</xsl:element>
+				<xsl:element name="ThursdayStart">00:00:00</xsl:element>
+				<xsl:element name="ThursdayEnd">23:59:00</xsl:element>
+				<xsl:element name="FridayStart">00:00:00</xsl:element>
+				<xsl:element name="FridayEnd">23:59:00</xsl:element>
+				<xsl:element name="SaturdayStart">00:00:00</xsl:element>
+				<xsl:element name="SaturdayEnd">23:59:00</xsl:element>
+				<xsl:element name="SundayStart">00:00:00</xsl:element>
+				<xsl:element name="SundayEnd">23:59:00</xsl:element>
 			</xsl:element>
 			<xsl:element name="Items">
 				<xsl:for-each select="../Items/ItemGroup">
@@ -138,5 +142,33 @@
 				</xsl:for-each>
 			</xsl:element>
 		</xsl:element>
+	</xsl:template>
+	
+	<xsl:template name="loop">
+		<xsl:param name="var"/>
+		<xsl:param name="index">
+			<xsl:value-of select="'1'"/>
+		</xsl:param>
+		<xsl:choose>
+			<xsl:when test="$var >=$ index">
+				<xsl:text disable-output-escaping="yes">&lt;Group</xsl:text>
+				<xsl:value-of select="$index"/>
+				<xsl:text disable-output-escaping="yes">&gt;</xsl:text>
+				<xsl:value-of select="1"/>
+				<xsl:text disable-output-escaping="yes">&lt;/Group</xsl:text>
+				<xsl:value-of select="$index"/>
+				<xsl:text disable-output-escaping="yes">&gt;</xsl:text>
+
+				<xsl:call-template name="loop">
+					<xsl:with-param name="var">10</xsl:with-param>
+					<xsl:with-param name="index">
+						<xsl:number value="number($index)+1"/>
+					</xsl:with-param>
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:comment>I am out of the loop</xsl:comment>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 </xsl:stylesheet>

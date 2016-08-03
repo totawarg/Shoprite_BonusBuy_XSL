@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+ 	*************************Documentation***********************************************************************
+ 	
+ 	#START STORE : Creates node for list of stores.
+ 	#START HEADER : Created Header node
+ 	#START REWARD TYPE : Calls rewardType template XSL for evaluating reward type for a given discount 
+ 						 type code and discount amount, discount percentage , price amount,
+ 						 product group ,article type and etc.	
+ 	#START REWARD VAL	: Calls rewardVal template XAL for evaluating reward val for a given reward type
+ 						  discount amount, discount percentage , price amount etc
+ 	#START LOW HIGH REWARD:
+ 	#START DELAYED PROMOTION:
+ 	#START LIMITED QUANTITY:
+ 	#START BUY AND GET PRODUCT MATCH: Calls a java function to check if buy and get product standard id
+ 	#START SINGLE BUY AND GET 'OR' CONDITION : OUT OF SCOPE
+ 	#START BUY CONDTION AT HEADER LEVEL: If require minimum amount is set a header level no item group 
+ 										 should be created on offer buy side Node : Offer/Buy/RequirementMinimumAmount
+ 	 
+ 	
+ 	**************************************************************************************************************
+ -->
 <xsl:stylesheet version="1.0" 
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:fo="http://www.w3.org/1999/XSL/Format" 
@@ -6,8 +27,13 @@
 	<xsl:include href="rewardType.xsl"/>
 	<xsl:include href="rewardVal.xsl"/>
 	<xsl:include href="createItemGroup.xsl"/>
+	<xsl:param name="MessageId"/>
+		<xsl:variable name="piMessageId">
+			<xsl:value-of select="$MessageId"/>
+		</xsl:variable>
 	
 	<xsl:template name="mapBonusBuy">
+		
 		<xsl:comment>Mapping <xsl:value-of select="RetailIncentive/RetailBonusBuyID"/>
 		
 		</xsl:comment>
@@ -21,6 +47,8 @@
 		<xsl:comment>
 			<xsl:value-of select="RetailIncentive/Offer/Get/ProductGroup/RetailIncentiveOfferDiscountTypeCode[1]"/>
 		</xsl:comment>
+		
+		
 		<xsl:variable name="rewardType">
 			<xsl:call-template name="rewardType"/>
 		</xsl:variable>
@@ -33,16 +61,20 @@
 		</xsl:variable>
 		<xsl:element name="Promotion">
 			<xsl:comment>Carry stores for splitting later...</xsl:comment>
+			<!-- START STORES-->
 			<xsl:for-each select="RetailIncentive/ReceivingStore">
 				<xsl:element name="ReceivingStore">
 					<xsl:element name="StoreInternalID">
-						<xsl:value-of select="StoreInternalID"/>
+						<xsl:value-of select="shoprite:addCheckDigitToSite(StoreInternalID)"/>
 					</xsl:element>
 				</xsl:element>
 			</xsl:for-each>
+			<!-- END OF STORES -->
+			
+			<!-- START HEADER -->
 			<xsl:element name="HeaderRecord">
 			    <xsl:element name="MessageID">
-			    	<xsl:value-of select="MessageHeader/ID"/>
+			    	<xsl:value-of select="$piMessageId"/>
 			    </xsl:element> 
 				<xsl:element name="Description">
 					<xsl:value-of select="RetailIncentive/Offer/Description/Description"/>
@@ -56,22 +88,28 @@
 					<xsl:value-of select="shoprite:convertUTCtoSouthAfricaTimezone(MessageHeader/CreationDateTime)"/>
 				</xsl:element>
 			</xsl:element>
+			<!-- END HEADER -->
+			
 			<!-- TODO:  limit to 9 chars - What is going to be the SAP Number Range?  Can we do a substring()/right()? -->
 			<xsl:element name="PromotionNo">
 				<xsl:value-of select="RetailIncentive/RetailBonusBuyID"/>
 			</xsl:element>
 			<xsl:comment>Defaulted to 3</xsl:comment>
 			<xsl:element name="Promotiontype">3</xsl:element>
+			
+			<!-- START REWARD TYPE -->
 			<xsl:element name="RewardType">
 				<xsl:value-of select="$rewardType"/>
 			</xsl:element>
+			<!-- END REWARD TYPE -->
+			
 			<xsl:element name="StartDate">
 				<xsl:value-of select="RetailIncentive/SalesPeriod/StartDate"/>
 			</xsl:element>
 			<xsl:element name="EndDate">
 				<xsl:choose>
 					<xsl:when test="RetailIncentive/Offer/ActivationStatusCode=2">
-						<xsl:value-of select="concat(substring(RetailIncentive/SalesPeriod/StartDate,0,9),number(substring(RetailIncentive/SalesPeriod/StartDate,9,11))-1)"/>
+						<xsl:value-of select="shoprite:getPreviousDateForActivationStatusCode2(RetailIncentive/SalesPeriod/StartDate)"/>
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:value-of select="RetailIncentive/SalesPeriod/EndDate"/>
@@ -81,6 +119,8 @@
 			<xsl:element name="Description">
 				<xsl:value-of select="RetailIncentive/Offer/Description/Description"/>
 			</xsl:element>
+			
+			<!-- START REWARD VAL -->
 			<xsl:element name="Rewardval">
 				<xsl:call-template name="rewardVal">
 					<xsl:with-param name="rewardType">
@@ -88,17 +128,24 @@
 					</xsl:with-param>
 				</xsl:call-template>
 			</xsl:element>
+			<!-- END REWARD VAL -->
+			
 			<xsl:comment>Defaulted to 1</xsl:comment>
 			<xsl:element name="ApportAlg">1</xsl:element>
+			
+			<!-- START LOW HIGH REWARD -->
 			<xsl:element name="LowHighReward">
 				<xsl:choose>
 					<xsl:when test="RetailIncentive/Offer/Get/RetailIncentiveOfferConditionCode = 600">1</xsl:when>
 					<xsl:when test="RetailIncentive/Offer/Get/ProductGroup/RetailIncentiveOfferConditionCode = 600">1</xsl:when>
 					<xsl:when test="number(RetailIncentive/Offer/Get/RetailIncentiveOfferConditionCode) = 2">0</xsl:when>
 					<xsl:when test="number(RetailIncentive/Offer/Get/ProductGroup/RetailIncentiveOfferConditionCode) = 2">0</xsl:when>
-					<xsl:otherwise/>
+					<xsl:otherwise>0</xsl:otherwise>
 				</xsl:choose>
 			</xsl:element>
+			<!-- END LOW HIGH REWARD -->
+			
+			<!-- START DELAYED PROMOTION -->
 			<xsl:element name="DelayedPromotion">
 				<xsl:choose>
 					<xsl:when test="RetailIncentive/Offer/Get/RetailIncentiveOfferConditionCode = 600">1</xsl:when>
@@ -106,9 +153,11 @@
 					<xsl:when test="number(RetailIncentive/Offer/Get/RetailIncentiveOfferConditionCode) = 2">1</xsl:when>
 					<xsl:when test="number(RetailIncentive/Offer/Get/ProductGroup/RetailIncentiveOfferConditionCode) = 2">1</xsl:when>
 					<!-- TODO: maybe sum GroupQuantity1 to 10 and if greater than 10 (in second step)? -->
-					<xsl:otherwise/>
+					<xsl:otherwise>0</xsl:otherwise>
 				</xsl:choose>
 			</xsl:element>
+			<!-- END DELAYED PROMOTION-->
+			
 			<!-- TODO:  clarify mapping instruction from Andy -->
 			<xsl:element name="MessageTypeId">
 				<xsl:choose>
@@ -121,6 +170,8 @@
 			</xsl:element>
 			<xsl:element name="TemplateId">0</xsl:element>
 			<xsl:element name="MemberCardReq">0</xsl:element>
+			
+			<!-- START LIMITED QUANTITY -->
 			<xsl:element name="LimitQuantity">
 				<xsl:choose>
 					<xsl:when test="RetailIncentive/Offer/GrantingMaximumNumberValue > 0">
@@ -129,16 +180,22 @@
 					<xsl:otherwise>0</xsl:otherwise>
 				</xsl:choose>
 			</xsl:element>
+			<!-- END LIMITED QUANTITY -->
+			
 			<xsl:element name="Items">
 				<!-- Matching Buy and Get nodes? -->
+				
+				<!-- START BUY AND GET PRODUCT MATCH -->
 				<xsl:variable name="buyAndGetMatches">
 					<xsl:variable name="buyProducts" select="RetailIncentive/Offer/Buy/ProductGroup/Product/StandardID"/>
 					<xsl:variable name="getProducts" select="RetailIncentive/Offer/Get/ProductGroup/Product/StandardID"/>
-					
 					<xsl:value-of select="string(shoprite:compareQueues($buyProducts, $getProducts))"/>
-					
 				</xsl:variable>
+				<!-- END BUY AND GET PRODUCT MATCH -->
 				
+				<!--  AndOrBusinessRuleExpressionTypeCode = 'O'/ OR CONDITION WILL NOT BE CONFIGUERED IN SAP,
+					  BELOW WAS BUILT BEFORE DECISION  -->
+				<!-- START SINGLE BUY AND GET 'OR' CONDITION -->	  
 				<xsl:variable name="singleBuyGroup">
 					<xsl:choose>
 						<xsl:when test="RetailIncentive/Offer/Buy/AndOrBusinessRuleExpressionTypeCode = 'O'">1</xsl:when>
@@ -151,9 +208,11 @@
 						<xsl:otherwise>0</xsl:otherwise>
 					</xsl:choose>
 				</xsl:variable>
+				<!-- END SINGLE BUY AND GET 'OR' CONDITION -->	
 				
 				<xsl:comment>ItemGroups for next mapping step</xsl:comment>
 				<!-- Buy conditions on Header level. -->
+				<!-- START BUY CONDTION AT HEADER LEVEL -->
 				<xsl:if test="count(RetailIncentive/Offer/Buy/RequirementMinimumAmount) > 0 and not(RetailIncentive/Offer/Buy/RequirementMinimumAmount = 0)">
 					<!-- Inject a group with no items -->
 					<xsl:call-template name="createItemGroup">
@@ -167,6 +226,7 @@
 						<xsl:with-param name="applyReward">0</xsl:with-param>
 					</xsl:call-template>
 				</xsl:if>
+				<!-- END BUY CONDTION AT HEADER LEVEL -->
 				<xsl:choose>
 					<!-- For Free Item only, if Buy and Get contains same items then merge the groups. -->
 					<xsl:when test="$rewardType = 15 and string($buyAndGetMatches) = 'true'">
@@ -175,6 +235,7 @@
 					</xsl:when>
 				
 				    <!-- AndOrBusinessRuleExpressionTypeCode" "O"-->
+				    <!-- START OF BUY-OR NOT ALL RULES IMPLEMENTED YET NOT IN SCOPE-->
 					<xsl:when test="number($singleBuyGroup) > 0">
 						<xsl:comment>Found ProductGroup OR condition for Buy side, create single group number</xsl:comment>
 						<!-- TODO:  All the BUY rules for the single group must be considered here -->
@@ -211,6 +272,7 @@
 							</xsl:with-param>
 						</xsl:call-template>
 					</xsl:when>
+					<!--  END OF BUY-OR -->
 					
 					<!-- AndOrBusinessRuleExpressionTypeCode" "A"-->
 					<xsl:otherwise>
@@ -266,7 +328,7 @@
 						<xsl:comment>RewardType 26 - do not map any Get groups.</xsl:comment>
 					</xsl:when>
 					<xsl:when test="$checkArticleType='ZBON' or $checkArticleType='ZCOU'">
-					<xsl:comment>RewardType 15 - do not map any Get groups for article type ZBON and ZCOU</xsl:comment>
+					<xsl:comment>Do not map any Get groups for article type ZBON and ZCOU</xsl:comment>
 					</xsl:when>
 					
 					<xsl:otherwise>

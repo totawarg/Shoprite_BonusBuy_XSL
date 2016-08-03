@@ -83,7 +83,7 @@
 			<!-- Cash Off - Check Get then Get/ProductGroup. -->
 			
 			<xsl:when test="($rewardType = 1 and $discountAmount > 0) or ($rewardType = 26 and $discountAmount>0)">
-				<xsl:value-of select="$discountAmount * 100"/>
+				<xsl:value-of select="format-number($discountAmount*100,'#')"/>
 			</xsl:when>
 			
 			<!-- FREE ITEM -->
@@ -98,13 +98,13 @@
 			</xsl:when>
 			
 			<xsl:when test="($rewardType=26 or $rewardType=1) and $discountAmount>0">
-				<xsl:value-of select="$discountAmount*100"/>
+				<xsl:value-of select="format-number($discountAmount*100,'#')"/>
 			</xsl:when>
 			<xsl:when test="$rewardType=26 and ($discountPercentage=100 or $priceAmount=0)">0</xsl:when>  
 			
 			<!-- PRICE AMOUNT -->
 			<xsl:when test="($rewardType = 8  or $rewardType = 21) and $priceAmount> 0">
-				<xsl:value-of select="$priceAmount * 100"/>
+				<xsl:value-of select="format-number($priceAmount * 100,'#')"/>
 			</xsl:when>
 			
 			<xsl:when test="$rewardType = 20">
