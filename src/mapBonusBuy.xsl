@@ -65,7 +65,7 @@
 			<xsl:for-each select="RetailIncentive/ReceivingStore">
 				<xsl:element name="ReceivingStore">
 					<xsl:element name="StoreInternalID">
-						<xsl:value-of select="shoprite:addCheckDigitToSite(StoreInternalID)"/>
+						<xsl:value-of select="format-number(shoprite:addCheckDigitToSite(StoreInternalID),'000000')"/>
 					</xsl:element>
 				</xsl:element>
 			</xsl:for-each>
