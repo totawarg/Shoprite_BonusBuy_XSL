@@ -34,6 +34,7 @@
 			<xsl:copy-of select="../MessageTypeId"/>
 			<xsl:copy-of select="../TemplateId"/>
 			<xsl:copy-of select="../MemberCardReq"/>
+			<xsl:copy-of select="../LimitQuantity"></xsl:copy-of>
 			<xsl:comment>Defaulted to 0</xsl:comment>
 			<xsl:element name="CardSchemes">
 				<xsl:element name="Group1">0</xsl:element>
