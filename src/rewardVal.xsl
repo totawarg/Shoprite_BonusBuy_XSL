@@ -2,8 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format">
 	<xsl:template name="rewardVal">
 		<xsl:param name="rewardType"/>
-		
-		<!-- DISCOUNT AMOUNT -->
+		<!-- DISCOUNT AMOUNT ----->
 		<xsl:param name ="discountAmount">
 			<xsl:choose>
 				<xsl:when test="number(RetailIncentive/Offer/Get/DiscountAmount) > 0">
@@ -88,7 +87,7 @@
 			
 			<!-- FREE ITEM -->
 			<xsl:when test="$rewardType=15 and  $discountPercentage = 100">
-				<xsl:value-of select="$discountPercentage div 100"/>
+				<xsl:value-of select="($discountPercentage div 100)*$GrantedQuantityLowerBoundaryDecimalValue"/>
 			</xsl:when>
 		
 			<!-- DISCOUNT PERCENTAGE -->
