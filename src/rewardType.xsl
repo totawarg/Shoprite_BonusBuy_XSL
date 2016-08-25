@@ -93,16 +93,18 @@
 					<xsl:when test="$discountPercentage='DP100' and $articleType='ZBON'">20</xsl:when>
 					<!-- #rule6 -->
 					<xsl:when test="$articleType='ZCOU'">26</xsl:when>
+					<!-- #rule10 -->
+					<xsl:when test="$discountPercentage='DPGTZERO' and $getHasProductGroup='false'">13</xsl:when>
 					<!-- #rule9 -->
 					<xsl:when test="$discountPercentage='DPGTZERO' and $getHasProductGroup">2</xsl:when>
+					
 					<!-- #rule8 -->
 					<xsl:when test="$discountPercentage='DPGTZERO'">2</xsl:when>
 					<!-- 368 -->
 					<!-- #rule5 -->
 					<xsl:when test="$discountPercentage='DP100' and ( not ($articleType='ZCOU') and not($articleType='ZBON'))">15</xsl:when>
 					<!-- Not 100 Percent Discount -->
-					<!-- #rule10 -->
-					<xsl:when test="$discountPercentage='DPGTZERO' and not($getHasProductGroup)">13</xsl:when>
+					
 					<xsl:otherwise>0</xsl:otherwise>
 				</xsl:choose>
 			</xsl:when>

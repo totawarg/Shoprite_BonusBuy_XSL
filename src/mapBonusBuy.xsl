@@ -163,7 +163,7 @@
 				<xsl:choose>
 					<xsl:when test="$rewardType=26">
 					<!-- Substring last three digits of internal ID-->
-						<xsl:value-of select="RetailIncentive/Offer/Get/ProductGroup/Product/InternalID"/>
+						<xsl:value-of select="substring(RetailIncentive/Offer/Get/ProductGroup/Product/InternalID,string-length(RetailIncentive/Offer/Get/ProductGroup/Product/InternalID)-2)"/>
 					</xsl:when>
 					<xsl:otherwise>0</xsl:otherwise>
 				</xsl:choose>

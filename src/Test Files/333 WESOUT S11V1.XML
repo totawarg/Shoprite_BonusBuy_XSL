@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<n0:RetailIncentiveERPStoreOfferReplicationBulkRequest_V1 xmlns:n0="http://sap.com/xi/SAPGlobal20/Global" xmlns:prx="urn:sap.com:proxy:R3D:/1SAI/TASBD72A09AF38ADD8F38E6:740">
+	<MessageHeader>
+		<ID>005056AE17701EE69AA4B8415D1494CF</ID>
+		<CreationDateTime>2016-08-23T11:35:58Z</CreationDateTime>
+		<SenderBusinessSystemID>R3DCLNT001</SenderBusinessSystemID>
+		<RecipientBusinessSystemID>PIDCLNT001</RecipientBusinessSystemID>
+	</MessageHeader>
+	<RetailIncentiveERPStoreOfferReplicationRequestMessage_V1>
+		<MessageHeader>
+			<ID>005056AE17701EE69AA4B8415D1474CF</ID>
+			<CreationDateTime>2016-08-23T11:35:58Z</CreationDateTime>
+			<SenderBusinessSystemID>R3DCLNT001</SenderBusinessSystemID>
+			<RecipientBusinessSystemID>PIDCLNT001</RecipientBusinessSystemID>
+		</MessageHeader>
+		<RetailIncentive>
+			<RetailBonusBuyID>100000000333</RetailBonusBuyID>
+			<TypeCode>2</TypeCode>
+			<SalesPeriod>
+				<StartDate>2017-01-02</StartDate>
+				<EndDate>2017-01-03</EndDate>
+			</SalesPeriod>
+			<DataOriginTypeCode>1</DataOriginTypeCode>
+			<ReceivingStore>
+				<StoreInternalID>189</StoreInternalID>
+			</ReceivingStore>
+			<SalesArea>
+				<StoreGroup>
+					<ID>MV1000</ID>
+					<SalesPeriod>
+						<StartDate>2017-01-02</StartDate>
+						<EndDate>2017-01-03</EndDate>
+					</SalesPeriod>
+					<Store>
+						<InternalID>189</InternalID>
+					</Store>
+				</StoreGroup>
+			</SalesArea>
+			<Offer>
+				<ID>~B00100000000333</ID>
+				<AlternativeRetailIncentiveOfferID>100000000333</AlternativeRetailIncentiveOfferID>
+				<CategoryCode>2</CategoryCode>
+				<TargetTypeCode>1</TargetTypeCode>
+				<ActivationStatusCode>2</ActivationStatusCode>
+				<Description>
+					<Description languageCode="en">Different Article Variants Different Prices - % off</Description>
+				</Description>
+				<Get>
+					<AndOrBusinessRuleExpressionTypeCode>A</AndOrBusinessRuleExpressionTypeCode>
+					<ProductGroup>
+						<IntervalBoundaryTypeCode>1</IntervalBoundaryTypeCode>
+						<GrantedQuantityLowerBoundaryDecimalValue>3.0</GrantedQuantityLowerBoundaryDecimalValue>
+						<RetailBonusBuyProductSelectionConditionCode>1</RetailBonusBuyProductSelectionConditionCode>
+						<RetailIncentiveOfferDiscountTypeCode>4</RetailIncentiveOfferDiscountTypeCode>
+						<DiscountPercent>10.0</DiscountPercent>
+						<Product>
+							<InternalID>10214487</InternalID>
+							<StandardID>6001001613453</StandardID>
+							<UnitCode>EA</UnitCode>
+							<n1:ArticleType xmlns:n1="urn:sap.shoprite.co.za:retail:pp">ZHAW</n1:ArticleType>
+						</Product>
+						<Product>
+							<InternalID>10214488</InternalID>
+							<StandardID>6001001613460</StandardID>
+							<UnitCode>EA</UnitCode>
+							<n1:ArticleType xmlns:n1="urn:sap.shoprite.co.za:retail:pp">ZHAW</n1:ArticleType>
+						</Product>
+						<Product>
+							<InternalID>10214489</InternalID>
+							<StandardID>6001001613477</StandardID>
+							<UnitCode>EA</UnitCode>
+							<n1:ArticleType xmlns:n1="urn:sap.shoprite.co.za:retail:pp">ZHAW</n1:ArticleType>
+						</Product>
+						<Product>
+							<InternalID>10214490</InternalID>
+							<StandardID>6001001613484</StandardID>
+							<UnitCode>EA</UnitCode>
+							<n1:ArticleType xmlns:n1="urn:sap.shoprite.co.za:retail:pp">ZHAW</n1:ArticleType>
+						</Product>
+						<Product>
+							<InternalID>10214491</InternalID>
+							<StandardID>6001001613491</StandardID>
+							<UnitCode>EA</UnitCode>
+							<n1:ArticleType xmlns:n1="urn:sap.shoprite.co.za:retail:pp">ZHAW</n1:ArticleType>
+						</Product>
+						<Product>
+							<InternalID>10214492</InternalID>
+							<StandardID>6001001613507</StandardID>
+							<UnitCode>EA</UnitCode>
+							<n1:ArticleType xmlns:n1="urn:sap.shoprite.co.za:retail:pp">ZHAW</n1:ArticleType>
+						</Product>
+						<Product>
+							<InternalID>10214493</InternalID>
+							<StandardID>6001001613514</StandardID>
+							<UnitCode>EA</UnitCode>
+							<n1:ArticleType xmlns:n1="urn:sap.shoprite.co.za:retail:pp">ZHAW</n1:ArticleType>
+						</Product>
+						<Product>
+							<InternalID>10214494</InternalID>
+							<StandardID>6001001613521</StandardID>
+							<UnitCode>EA</UnitCode>
+							<n1:ArticleType xmlns:n1="urn:sap.shoprite.co.za:retail:pp">ZHAW</n1:ArticleType>
+						</Product>
+						<Product>
+							<InternalID>10214495</InternalID>
+							<StandardID>6001001613538</StandardID>
+							<UnitCode>EA</UnitCode>
+							<n1:ArticleType xmlns:n1="urn:sap.shoprite.co.za:retail:pp">ZHAW</n1:ArticleType>
+						</Product>
+						<Product>
+							<InternalID>10214496</InternalID>
+							<StandardID>6001001613545</StandardID>
+							<UnitCode>EA</UnitCode>
+							<n1:ArticleType xmlns:n1="urn:sap.shoprite.co.za:retail:pp">ZHAW</n1:ArticleType>
+						</Product>
+						<Product>
+							<InternalID>10214497</InternalID>
+							<StandardID>6001001613552</StandardID>
+							<UnitCode>EA</UnitCode>
+							<n1:ArticleType xmlns:n1="urn:sap.shoprite.co.za:retail:pp">ZHAW</n1:ArticleType>
+						</Product>
+						<Product>
+							<InternalID>10214498</InternalID>
+							<StandardID>6001001613569</StandardID>
+							<UnitCode>EA</UnitCode>
+							<n1:ArticleType xmlns:n1="urn:sap.shoprite.co.za:retail:pp">ZHAW</n1:ArticleType>
+						</Product>
+						<Product>
+							<InternalID>10218718</InternalID>
+							<StandardID>6001001614504</StandardID>
+							<UnitCode>EA</UnitCode>
+							<n1:ArticleType xmlns:n1="urn:sap.shoprite.co.za:retail:pp">ZHAW</n1:ArticleType>
+						</Product>
+						<Product>
+							<InternalID>10218719</InternalID>
+							<StandardID>6001001614511</StandardID>
+							<UnitCode>EA</UnitCode>
+							<n1:ArticleType xmlns:n1="urn:sap.shoprite.co.za:retail:pp">ZHAW</n1:ArticleType>
+						</Product>
+						<Product>
+							<InternalID>10218720</InternalID>
+							<StandardID>6001001614528</StandardID>
+							<UnitCode>EA</UnitCode>
+							<n1:ArticleType xmlns:n1="urn:sap.shoprite.co.za:retail:pp">ZHAW</n1:ArticleType>
+						</Product>
+						<Product>
+							<InternalID>10242979</InternalID>
+							<StandardID>6001001279697</StandardID>
+							<UnitCode>EA</UnitCode>
+							<n1:ArticleType xmlns:n1="urn:sap.shoprite.co.za:retail:pp">ZHAW</n1:ArticleType>
+						</Product>
+						<Product>
+							<InternalID>10257774</InternalID>
+							<StandardID>6001001365147</StandardID>
+							<UnitCode>EA</UnitCode>
+							<n1:ArticleType xmlns:n1="urn:sap.shoprite.co.za:retail:pp">ZHAW</n1:ArticleType>
+						</Product>
+					</ProductGroup>
+				</Get>
+				<Store>
+					<InternalID>189</InternalID>
+				</Store>
+			</Offer>
+		</RetailIncentive>
+	</RetailIncentiveERPStoreOfferReplicationRequestMessage_V1>
+</n0:RetailIncentiveERPStoreOfferReplicationBulkRequest_V1>
