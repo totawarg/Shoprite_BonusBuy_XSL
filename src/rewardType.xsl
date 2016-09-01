@@ -61,7 +61,7 @@
 				
 		<xsl:choose>
 		    <!-- #rule11 and #rule12 -->
-			<!-- POS can only handle one RewardType, therefor all Get side Discount Type Codes should be the same. -->
+			<!-- POS can only handle one RewardType, therefore all Get side Discount Type Codes should be the same. -->
 			<xsl:when test="not($countDTC = $countDTCmatchingFirst)">99</xsl:when>
 
 			<!--START  RetailIncentiveOfferDiscountTypeCode = 2-->
