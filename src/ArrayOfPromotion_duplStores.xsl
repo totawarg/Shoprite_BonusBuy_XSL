@@ -3,7 +3,7 @@
 	<xsl:template name="ArrayOfPromotion_duplStores">
 		<xsl:element name="ArrayOfPromotion_sortedStores">
 			<xsl:for-each select="//Promotion">
-				<xsl:sort select="HeaderRecord/Store"/>
+				<xsl:sort select="HeaderRecord/Site"/>
 				<xsl:copy-of select="."/>
 			</xsl:for-each>
 		</xsl:element>

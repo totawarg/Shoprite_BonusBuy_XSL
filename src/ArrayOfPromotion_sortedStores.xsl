@@ -6,36 +6,36 @@
 			<xsl:text disable-output-escaping="yes">&lt;Message1&gt;</xsl:text>
 			<xsl:for-each select="//Promotion">
 				<xsl:if
-					test="position = 1 or not(preceding-sibling::*[1]/HeaderRecord/Store = ./HeaderRecord/Store)">
+					test="position = 1 or not(preceding-sibling::*[1]/HeaderRecord/Site = ./HeaderRecord/Site)">
 					<xsl:if test="position = 1">
 						<xsl:comment>
-							First Store!
+							First Site!
 						</xsl:comment>
 					</xsl:if>
 					<xsl:if test="not(position = 1)">
 
 						<xsl:comment>
-							New Store!
+							New Site!
 						</xsl:comment>
 					</xsl:if>
 
 					<xsl:comment>
-						Store
-						<xsl:value-of select="./HeaderRecord/Store" />
+						Site
+						<xsl:value-of select="./HeaderRecord/Site" />
 					</xsl:comment>
 					<xsl:text disable-output-escaping="yes">&lt;ArrayOfPromotion&gt;</xsl:text>
 				</xsl:if>
 				<xsl:copy-of select="." />
 				<xsl:if
-					test="not(following-sibling::*[1]/HeaderRecord/Store = ./HeaderRecord/Store)">
+					test="not(following-sibling::*[1]/HeaderRecord/Site = ./HeaderRecord/Site)">
 					<xsl:comment>
-						Store Change!
+						Site Change!
 					</xsl:comment>
 					<xsl:text disable-output-escaping="yes">&lt;/ArrayOfPromotion&gt;</xsl:text>
 				</xsl:if>
 				<xsl:if test="position = last()">
 					<xsl:comment>
-						Last Store!
+						Last Site!
 					</xsl:comment>
 				</xsl:if>
 			</xsl:for-each>
