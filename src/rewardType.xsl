@@ -7,6 +7,9 @@
 				<xsl:when test="RetailIncentive/Offer/Get/RetailIncentiveOfferDiscountTypeCode =2 or RetailIncentive/Offer/Get/ProductGroup/RetailIncentiveOfferDiscountTypeCode=2">2</xsl:when>
 				<xsl:when test="RetailIncentive/Offer/Get/RetailIncentiveOfferDiscountTypeCode =3 or RetailIncentive/Offer/Get/ProductGroup/RetailIncentiveOfferDiscountTypeCode=3">3</xsl:when>
 				<xsl:when test="RetailIncentive/Offer/Get/RetailIncentiveOfferDiscountTypeCode =4 or RetailIncentive/Offer/Get/ProductGroup/RetailIncentiveOfferDiscountTypeCode=4">4</xsl:when>
+				<xsl:when test="RetailIncentive/Offer/Get/ProductGroup/RetailIncentiveOfferDiscountTypeCode"><xsl:value-of select="RetailIncentive/Offer/Get/ProductGroup/RetailIncentiveOfferDiscountTypeCode"/></xsl:when>
+				<xsl:when test="RetailIncentive/Offer/Get/RetailIncentiveOfferDiscountTypeCode"><xsl:value-of select="RetailIncentive/Offer/Get/RetailIncentiveOfferDiscountTypeCode"/></xsl:when>
+				<xsl:otherwise>0</xsl:otherwise>
 			</xsl:choose>
 		</xsl:param>
 		<!-- Article Type -->
