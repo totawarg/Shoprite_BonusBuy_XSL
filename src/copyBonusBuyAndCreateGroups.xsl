@@ -1,12 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format">
-	<xsl:template name="copyBonusBuyAndCreateGroups" >
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:shoprite="za.co.invictus.xsl.Utils" xmlns:xsltc="http://xml.apache.org/xalan/xsltc">
+	<xsl:template name="copyBonusBuyAndCreateGroups">
+	<xsl:variable name="sapsid" select="shoprite:getPISID()"/>
+		<xsl:variable name="businessSystem">
+			<xsl:call-template name="BS">
+				<xsl:with-param name="sapsid" select="$sapsid"/>
+			</xsl:call-template>
+		</xsl:variable>
+		<xsl:variable name="channelName" select="'DATARITE_SOAP_Receiver_Shoprite_SAP_TestStoreMapping'"/>
+		
+		<xsl:variable name="environment">
+			<xsl:value-of select="shoprite:getPIToDatariteEnvLookup($sapsid)"/>
+		  
+		</xsl:variable>
+		<xsl:variable name="site">
+			<xsl:choose>
+				<xsl:when test="not($sapsid='PIP')">
+					<xsl:value-of select="shoprite:getTestStoreIDbySAPStoreID(StoreInternalID,$environment,$businessSystem,$channelName)"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="StoreInternalID"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
 		<xsl:element name="Promotion">
 			<xsl:element name="HeaderRecord">
-					
 				<xsl:element name="MessageID">
 					<xsl:value-of select="../HeaderRecord/MessageID"/>
-				</xsl:element>	
+				</xsl:element>
 				<xsl:element name="Decription">
 					<xsl:value-of select="../HeaderRecord/Description"/>
 				</xsl:element>
@@ -17,9 +38,8 @@
 					<xsl:value-of select="StoreInternalID"/>
 				</xsl:element>
 				<xsl:element name="FileDateTime">
-				<xsl:value-of select="../HeaderRecord/FileDateTime"/>
+					<xsl:value-of select="concat($site,'.',../HeaderRecord/FileDateTime)"/>
 				</xsl:element>
-				
 			</xsl:element>
 			<xsl:copy-of select="../PromotionNo"/>
 			<xsl:copy-of select="../Promotiontype"/>
@@ -34,7 +54,7 @@
 			<xsl:copy-of select="../MessageTypeId"/>
 			<xsl:copy-of select="../TemplateId"/>
 			<xsl:copy-of select="../MemberCardReq"/>
-			<xsl:copy-of select="../LimitQuantity"></xsl:copy-of>
+			<xsl:copy-of select="../LimitQuantity"/>
 			<xsl:comment>Defaulted to 0</xsl:comment>
 			<xsl:element name="CardSchemes">
 				<xsl:element name="Group1">0</xsl:element>
@@ -71,7 +91,9 @@
 				</xsl:for-each>
 				<xsl:call-template name="loop">
 					<xsl:with-param name="var">10</xsl:with-param>
-					<xsl:with-param name="index"><xsl:value-of select="count(../Items/ItemGroup)+1"/></xsl:with-param>
+					<xsl:with-param name="index">
+						<xsl:value-of select="count(../Items/ItemGroup)+1"/>
+					</xsl:with-param>
 				</xsl:call-template>
 			</xsl:element>
 			<xsl:element name="GroupQuantities">
@@ -144,7 +166,6 @@
 			</xsl:element>
 		</xsl:element>
 	</xsl:template>
-	
 	<xsl:template name="loop">
 		<xsl:param name="var"/>
 		<xsl:param name="index">
@@ -159,7 +180,6 @@
 				<xsl:text disable-output-escaping="yes">&lt;/Group</xsl:text>
 				<xsl:value-of select="$index"/>
 				<xsl:text disable-output-escaping="yes">&gt;</xsl:text>
-
 				<xsl:call-template name="loop">
 					<xsl:with-param name="var">10</xsl:with-param>
 					<xsl:with-param name="index">
@@ -170,6 +190,24 @@
 			<xsl:otherwise>
 				<xsl:comment>I am out of the loop</xsl:comment>
 			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+	<xsl:template name="env">
+		<xsl:param name="sapsid"/>
+		<xsl:choose>
+			<xsl:when test="$sapsid='PID'">DEV</xsl:when>
+			<xsl:when test="$sapsid='PIQ'">QA</xsl:when>
+			<xsl:when test="$sapsid='PI3'">UAT</xsl:when>
+			<xsl:otherwise>PROD</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+	<xsl:template name="BS">
+		<xsl:param name="sapsid"/>
+		<xsl:choose>
+			<xsl:when test="$sapsid='PID'">DATARITE</xsl:when>
+			<xsl:when test="$sapsid='PIQ'">DATARITE_QA</xsl:when>
+			<xsl:when test="$sapsid='PI3'">DATARITE_PI3</xsl:when>
+			<xsl:otherwise>DATARITE_PRD</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
 </xsl:stylesheet>
