@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:shoprite="za.co.invictus.xsl.Utils" xmlns:xsltc="http://xml.apache.org/xalan/xsltc">
 	<xsl:template name="copyBonusBuyAndCreateGroups">
-	<xsl:variable name="sapsid" select="shoprite:getPISID()"/>
+		<xsl:variable name="sapsid" select="shoprite:getPISID()"/>
 		<xsl:variable name="businessSystem">
 			<xsl:call-template name="BS">
 				<xsl:with-param name="sapsid" select="$sapsid"/>
 			</xsl:call-template>
 		</xsl:variable>
 		<xsl:variable name="channelName" select="'DATARITE_SOAP_Receiver_Shoprite_SAP_TestStoreMapping'"/>
-		
 		<xsl:variable name="environment">
 			<xsl:value-of select="shoprite:getPIToDatariteEnvLookup($sapsid)"/>
-		  
 		</xsl:variable>
 		<xsl:variable name="site">
 			<xsl:choose>
@@ -107,18 +105,38 @@
 					<xsl:text disable-output-escaping="yes">&gt;</xsl:text>
 				</xsl:for-each>
 			</xsl:element>
-			<xsl:comment>Defaulted to 1</xsl:comment>
 			<xsl:element name="ApplyApportionments">
-				<xsl:element name="Group1">1</xsl:element>
-				<xsl:element name="Group2">1</xsl:element>
-				<xsl:element name="Group3">1</xsl:element>
-				<xsl:element name="Group4">1</xsl:element>
-				<xsl:element name="Group5">1</xsl:element>
-				<xsl:element name="Group6">1</xsl:element>
-				<xsl:element name="Group7">1</xsl:element>
-				<xsl:element name="Group8">1</xsl:element>
-				<xsl:element name="Group9">1</xsl:element>
-				<xsl:element name="Group10">1</xsl:element>
+				<xsl:for-each select="../Items/ItemGroup">
+					<xsl:choose>
+						<xsl:when test="contains(Item[1]/GroupLink,'GET')">
+							<xsl:text disable-output-escaping="yes">&lt;Group</xsl:text>
+							<xsl:value-of select="position()"/>
+							<xsl:text disable-output-escaping="yes">&gt;</xsl:text>
+							<xsl:value-of select="'1'"/>
+							<xsl:text disable-output-escaping="yes">&lt;/Group</xsl:text>
+							<xsl:value-of select="position()"/>
+							<xsl:text disable-output-escaping="yes">&gt;</xsl:text>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:text disable-output-escaping="yes">&lt;Group</xsl:text>
+							<xsl:value-of select="position()"/>
+							<xsl:text disable-output-escaping="yes">&gt;</xsl:text>
+							<xsl:value-of select="'0'"/>
+							<xsl:text disable-output-escaping="yes">&lt;/Group</xsl:text>
+							<xsl:value-of select="position()"/>
+							<xsl:text disable-output-escaping="yes">&gt;</xsl:text>
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:for-each>
+				<xsl:call-template name="loop">
+					<xsl:with-param name="var">10</xsl:with-param>
+					<xsl:with-param name="index">
+						<xsl:value-of select="count(../Items/ItemGroup)+1"/>
+					</xsl:with-param>
+					<xsl:with-param name="value">
+						<xsl:value-of select="0"/>
+					</xsl:with-param>
+				</xsl:call-template>
 			</xsl:element>
 			<xsl:comment>Defaulted to 1</xsl:comment>
 			<xsl:element name="ActivationDays">
@@ -171,12 +189,15 @@
 		<xsl:param name="index">
 			<xsl:value-of select="'1'"/>
 		</xsl:param>
+		<xsl:param name="value">
+			<xsl:value-of select="'1'"/>
+		</xsl:param>
 		<xsl:choose>
 			<xsl:when test="$var >=$ index">
 				<xsl:text disable-output-escaping="yes">&lt;Group</xsl:text>
 				<xsl:value-of select="$index"/>
 				<xsl:text disable-output-escaping="yes">&gt;</xsl:text>
-				<xsl:value-of select="1"/>
+				<xsl:value-of select="$value"/>
 				<xsl:text disable-output-escaping="yes">&lt;/Group</xsl:text>
 				<xsl:value-of select="$index"/>
 				<xsl:text disable-output-escaping="yes">&gt;</xsl:text>
@@ -184,6 +205,9 @@
 					<xsl:with-param name="var">10</xsl:with-param>
 					<xsl:with-param name="index">
 						<xsl:number value="number($index)+1"/>
+					</xsl:with-param>
+					<xsl:with-param name="value">
+						<xsl:value-of select="$value"/>
 					</xsl:with-param>
 				</xsl:call-template>
 			</xsl:when>
