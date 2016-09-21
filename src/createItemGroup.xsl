@@ -7,6 +7,7 @@
 		<xsl:param name="groupType"/>
 		<xsl:param name="groupQuantity"/>
 		<xsl:param name="applyReward"/>
+		<xsl:param name="applyApportionments" select="0"/>
 		<xsl:element name="ItemGroup">
 			<xsl:element name="GroupType">
 				<xsl:value-of select="$groupType"/>
@@ -16,6 +17,9 @@
 			</xsl:element>
 			<xsl:element name="ApplyReward">
 				<xsl:value-of select="$applyReward"/>
+			</xsl:element>
+			<xsl:element name="ApplyApportionments">
+				<xsl:value-of select="$applyApportionments"/>
 			</xsl:element>
 			<xsl:if test="count($productNodes/StandardID) > 0">
 				<xsl:for-each select="$productNodes">

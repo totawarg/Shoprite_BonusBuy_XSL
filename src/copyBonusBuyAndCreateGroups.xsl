@@ -107,26 +107,13 @@
 			</xsl:element>
 			<xsl:element name="ApplyApportionments">
 				<xsl:for-each select="../Items/ItemGroup">
-					<xsl:choose>
-						<xsl:when test="contains(Item[1]/GroupLink,'GET')">
-							<xsl:text disable-output-escaping="yes">&lt;Group</xsl:text>
-							<xsl:value-of select="position()"/>
-							<xsl:text disable-output-escaping="yes">&gt;</xsl:text>
-							<xsl:value-of select="'1'"/>
-							<xsl:text disable-output-escaping="yes">&lt;/Group</xsl:text>
-							<xsl:value-of select="position()"/>
-							<xsl:text disable-output-escaping="yes">&gt;</xsl:text>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:text disable-output-escaping="yes">&lt;Group</xsl:text>
-							<xsl:value-of select="position()"/>
-							<xsl:text disable-output-escaping="yes">&gt;</xsl:text>
-							<xsl:value-of select="'0'"/>
-							<xsl:text disable-output-escaping="yes">&lt;/Group</xsl:text>
-							<xsl:value-of select="position()"/>
-							<xsl:text disable-output-escaping="yes">&gt;</xsl:text>
-						</xsl:otherwise>
-					</xsl:choose>
+					<xsl:text disable-output-escaping="yes">&lt;Group</xsl:text>
+					<xsl:value-of select="position()"/>
+					<xsl:text disable-output-escaping="yes">&gt;</xsl:text>
+					<xsl:value-of select="ApplyApportionments"/>
+					<xsl:text disable-output-escaping="yes">&lt;/Group</xsl:text>
+					<xsl:value-of select="position()"/>
+					<xsl:text disable-output-escaping="yes">&gt;</xsl:text>
 				</xsl:for-each>
 				<xsl:call-template name="loop">
 					<xsl:with-param name="var">10</xsl:with-param>
@@ -216,15 +203,7 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-	<xsl:template name="env">
-		<xsl:param name="sapsid"/>
-		<xsl:choose>
-			<xsl:when test="$sapsid='PID'">DEV</xsl:when>
-			<xsl:when test="$sapsid='PIQ'">QA</xsl:when>
-			<xsl:when test="$sapsid='PI3'">UAT</xsl:when>
-			<xsl:otherwise>PROD</xsl:otherwise>
-		</xsl:choose>
-	</xsl:template>
+	
 	<xsl:template name="BS">
 		<xsl:param name="sapsid"/>
 		<xsl:choose>
