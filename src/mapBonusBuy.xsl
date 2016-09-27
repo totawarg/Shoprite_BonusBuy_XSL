@@ -115,8 +115,8 @@
 				</xsl:call-template>
 			</xsl:element>
 			<!-- END REWARD VAL -->
-			<xsl:comment>Defaulted to 1</xsl:comment>
-			<xsl:element name="ApportAlg">1</xsl:element>
+			<xsl:comment>Defaulted to 4</xsl:comment>
+			<xsl:element name="ApportAlg">4</xsl:element>
 			<!-- START LOW HIGH REWARD -->
 			<xsl:element name="LowHighReward">
 				<xsl:choose>
